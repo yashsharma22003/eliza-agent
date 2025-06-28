@@ -6,7 +6,7 @@ import { mainCall } from './index.js'; // Ensure this is also ESM
 
 const LOW_FILE = path.resolve('.local-kv-strategy:low.json');
 const HIGH_FILE = path.resolve('.local-kv-strategy:high.json');
-const INTERVAL_MS = 150000;
+const INTERVAL_MS = 1500000;
 
 let lastLow = null;
 let lastHigh = null;
