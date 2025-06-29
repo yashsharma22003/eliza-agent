@@ -2,7 +2,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 import express from 'express';
-import { mainCall } from './index.js'; // Ensure this is also ESM
+import cors from 'cors'; // 1. Import the cors middleware
+import { mainCall } from './index.js';
 
 const LOW_FILE = path.resolve('.local-kv-strategy:low.json');
 const HIGH_FILE = path.resolve('.local-kv-strategy:high.json');
@@ -85,6 +86,14 @@ async function main() {
 
   const app = express();
   const PORT = process.env.PORT || 4000;
+
+  // 2. Use the cors middleware before your routes
+  // This will allow requests from any origin.
+  app.use(cors());
+
+  // For a more secure setup, you can specify allowed origins:
+  // app.use(cors({ origin: 'http://localhost:3000' }));
+
 
   app.get("/latest/low", (_req, res) => {
     const parsed = tryParseJSON(lastLow);
